@@ -6,6 +6,7 @@ import edu.upc.dsa.martianslog.models.Product;
 import java.util.List;
 
 import edu.upc.dsa.martianslog.models.ProfileUser;
+import edu.upc.dsa.martianslog.models.Report;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Body;
@@ -18,6 +19,9 @@ public interface ApiService
     public static final String API_URL="http://10.0.2.2:8080/dsaApp/";
     @POST("user/login")
     Call<LoginUsuari> loginUser(@Body LoginUsuari user);
+
+    @POST("user/report/add")
+    Call<Report> addReport(@Body Report report);
 
     @GET("user/getUser/{username}")
     Call<ProfileUser> getUser(@Path("username") String username);

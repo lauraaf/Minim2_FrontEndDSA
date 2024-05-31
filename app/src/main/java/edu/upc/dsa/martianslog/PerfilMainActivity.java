@@ -42,8 +42,6 @@ public class PerfilMainActivity extends AppCompatActivity
         surnameTxt.setText("Surname");
         coinsTxt.setText("coins");
 
-
-
         // Initialize Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
@@ -58,6 +56,15 @@ public class PerfilMainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilMainActivity.this, TiendaActivity.class);
+                startActivity(intent);
+            }});
+
+        //Codi del boto per anar a report
+        Button buttonGoReport = findViewById(R.id.goReport_btn);
+        buttonGoReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PerfilMainActivity.this, ReportActivity.class);
                 startActivity(intent);
             }});
 
@@ -99,35 +106,8 @@ public class PerfilMainActivity extends AppCompatActivity
 
     }
 
-    public void showDataOnClick(View view){
-        Call<ProfileUser> call = apiService.getUser(username_login);
-        call.enqueue(new Callback<ProfileUser>(){
 
-            @Override
-            public void onResponse(Call<ProfileUser> call, Response<ProfileUser> response) {
-                if (response.isSuccessful()) {
-                    user = response.body();
-                    String name = user.getName();
-                    String surname = user.getSurname();
-                    double coins = user.getCoins();
-                    //TextView nametxt = findViewById(R.id.nameTextView);
-                    //PerfilMainActivity.this.nameTxt.setText(name);
-                    PerfilMainActivity.this.nameTxt.setText(name);
-                    //TextView surnametxt = findViewById(R.id.surnameTextView);
-                    PerfilMainActivity.this.surnameTxt.setText(surname);
-                    //TextView coinstxt = findViewById(R.id.coinsTextView);
-                    PerfilMainActivity.this.coinsTxt.setText((int) coins);
-                }
-                else Log.e("Error", "Failed to fetch user");
-            }
 
-            @Override
-            public void onFailure(Call<ProfileUser> call, Throwable t) {
-                Log.e("Error", "Network error: " + t.getMessage());
-            }
-
-        });
-    }
 
     //Codi per cridar a la API i que retorni un usuari
    /*private void fetchUser(){
